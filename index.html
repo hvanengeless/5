@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Vliegende Eend B.V. | Enterprise Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables & Apple-Inspired Dark Corporate Theme --- */
+        :root {
+            --bg-deep: #000000;
+            --bg-surface: #0a0a0c;
+            --bg-card: #151518;
+            --color-primary: #3b82f6; /* Corporate Blue */
+            --color-primary-glow: rgba(59, 130, 246, 0.3);
+            --color-secondary: #60a5fa; /* Light Blue */
+            --text-main: #F5F5F7;
+            --text-muted: #86868B; /* Apple classic gray */
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --radius-lg: 18px;
+            --radius-sm: 8px;
+            --max-width: 1080px;
+            --transition-speed: 0.4s;
+        }
+
+        /* --- Global Resets & Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-deep);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(96, 165, 250, 0.05) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4, h5 {
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .citation {
+            font-size: 0.75rem;
+            color: var(--color-primary);
+            opacity: 0.7;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 140px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, #fff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- Header Navigation --- */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .brand-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+
+        .brand-logo svg {
+            color: var(--color-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-main);
+        }
+
+        /* --- 1. Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 64px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -0.04em;
+            background: linear-gradient(180deg, #fff 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 36px;
+            background: var(--text-main);
+            color: #000;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all var(--transition-speed) ease;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+            opacity: 0;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            background: var(--color-primary);
+            color: #fff;
+            box-shadow: 0 8px 24px var(--color-primary-glow);
+        }
+
+        /* --- 2. About Us --- */
+        .about-section {
+            background-color: var(--bg-surface);
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            padding: 70px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .about-card strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- 3. Services --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .service-box {
+            background: var(--bg-card);
+            padding: 50px 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .service-box:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            background: #1c1c1e;
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            color: var(--color-primary);
+            margin-bottom: 24px;
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .service-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .service-box p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* --- 4. Process --- */
+        .process-section {
+            background-color: var(--bg-surface);
+        }
+
+        .process-track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .process-step {
+            width: 30%;
+            text-align: center;
+        }
+
+        .step-circle {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #151518, #222226);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px auto;
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- 5. Contact Section --- */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .form-area {
+            padding: 60px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px;
+            background: var(--bg-surface);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed) ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--color-primary);
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            width: 100%;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .submit-btn:hover {
+            background: #2563eb;
+        }
+
+        .info-area {
+            background: rgba(59, 130, 246, 0.03);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .info-item {
+            margin-bottom: 32px;
+        }
+
+        .info-item h4 {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .info-item p, .info-item a {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        .info-item a:hover {
+            color: var(--color-primary);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--bg-deep);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3.5rem; }
+            .contact-layout { grid-template-columns: 1fr; }
+            .process-track { flex-direction: column; gap: 48px; align-items: center; }
+            .process-step { width: 100%; max-width: 350px; }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="brand-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                DE VLIEGENDE EEND
+            </a>
+            <nav class="nav-menu">
+                <a href="#about">Corporate Overview</a>
+                <a href="#services">Portfolio Strategy</a>
+                <a href="#process">Management System</a>
+                <a href="#contact">Executive Comms</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Strategic oversight.<br>Enterprise excellence.</h1>
+            <p>De Vliegende Eend B.V. <span class="citation"></span> is a premier management enterprise driving the operational and financial success of high-growth subsidiaries across the Netherlands.</p>
+            <a href="#contact" class="btn-primary">Initiate Dialogue</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-padding about-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Corporate Foundation.</h2>
+                <p class="section-subtitle">Bridging capital allocation with rigorous operational management.</p>
+            </div>
+            <div class="about-card">
+                Strategically located in Rotterdam, Zuid-Holland, Netherlands <span class="citation"></span>, <strong>De Vliegende Eend B.V.</strong> <span class="citation"></span> operates as a top-tier holding company <span class="citation"></span>. We specialize in the Management of Companies and Enterprises <span class="citation"></span>, providing robust financial, operational, and strategic frameworks for our subsidiaries. Our primary focus is on consolidating resources, optimizing corporate structures, and scaling innovative ventures within our diverse portfolio. By leveraging deep industry expertise and rigorous management protocols, we ensure sustainable growth, total compliance, and uncompromising operational resilience. Ultimately, our mission is to maximize market valuation while fostering innovation across our managed entities.
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section-padding" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Capabilities.</h2>
+                <p class="section-subtitle">Comprehensive management protocols for enterprise architecture.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3>Portfolio Management</h3>
+                    <p>Operating as a distinguished holding company <span class="citation"></span>, we deliver high-level strategic oversight and meticulous resource allocation for our subsidiary enterprises. By actively monitoring market trends and financial performance, we position our portfolio companies to maximize their overall valuation.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Corporate Governance</h3>
+                    <p>Within the Management of Companies and Enterprises industry <span class="citation"></span>, our executive board ensures the implementation of robust administrative, legal, and financial frameworks across all managed entities. We maintain strict compliance protocols to minimize systemic risk.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Strategic Scaling</h3>
+                    <p>We actively drive corporate growth through optimized investment strategies, targeted acquisitions, and the facilitation of cross-entity synergies. Our structural support allows innovative ventures to scale their operations securely on a national and global level.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section-padding process-section" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Methodology.</h2>
+                <p class="section-subtitle">A systematic, analytical approach to portfolio expansion.</p>
+            </div>
+            
+            <div class="process-track">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="step-circle">1</div>
+                    <h3>Acquisition</h3>
+                    <p>We conduct deep-level audits to evaluate high-potential enterprises, integrating them securely into our corporate holding structure.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div class="step-circle">2</div>
+                    <h3>Optimization</h3>
+                    <p>Our management team deploys advanced administrative and financial protocols to streamline operations and significantly reduce overhead.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <div class="step-circle">3</div>
+                    <h3>Maximization</h3>
+                    <p>We scale operations through strategic funding, network synergies, and expert executive guidance to realize peak market value.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section-padding" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Secure Comms.</h2>
+                <p class="section-subtitle">Initiate contact with our executive board for corporate inquiries.</p>
+            </div>
+            
+            <div class="contact-layout">
+                <!-- Contact Form -->
+                <div class="form-area">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Entity / Organization Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Authorized Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Executive Inquiry</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Transmit Request</button>
+                    </form>
+                </div>
+
+                <!-- Contacts Info -->
+                <div class="info-area">
+                    <div class="info-item">
+                        <h4>Headquarters</h4>
+                        <p>Coolsingel 104 3011 AG<span class="citation"></span><br>Rotterdam, Zuid-Holland<span class="citation"></span><br>Netherlands<span class="citation"></span></p>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>Digital Comm Node</h4>
+                        <a href="mailto:info@devliegendeeend.site">info@devliegendeeend.site</a>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>Corporate Line</h4>
+                        <p>+31-622903880<span class="citation"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 De Vliegende Eend B.V. <span class="citation"></span> All rights reserved. Management of Companies and Enterprises.</p>
+        </div>
+    </footer>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 64,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
